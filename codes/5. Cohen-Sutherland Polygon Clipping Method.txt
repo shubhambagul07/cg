@@ -1,0 +1,65 @@
+#include <GL/glut.h>
+
+#define LEFT 1
+#define RIGHT 2
+#define BOTTOM 4
+#define TOP 8
+
+int computeCode(float x, float y, float xmin, float ymin, float xmax, float ymax) {
+    int code = 0;
+    if (x < xmin) code |= LEFT;
+    else if (x > xmax) code |= RIGHT;
+    if (y < ymin) code |= BOTTOM;
+    else if (y > ymax) code |= TOP;
+    return code;
+}
+
+void cohenSutherlandClip(float x0, float y0, float x1, float y1, float xmin, float ymin, float xmax, float ymax) {
+    int code0 = computeCode(x0, y0, xmin, ymin, xmax, ymax);
+    int code1 = computeCode(x1, y1, xmin, ymin, xmax, ymax);
+
+    bool accept = false;
+
+    while (true) {
+        if (!(code0 | code1)) {
+            accept = true;
+            break;
+        } else if (code0 & code1) {
+            break;
+        } else {
+            float x, y;
+            int codeOut = code0 ? code0 : code1;
+            if (codeOut & TOP) {
+                x = x0 + (x1 - x0) * (ymax - y0) / (y1 - y0);
+                y = ymax;
+            } else if (codeOut & BOTTOM) {
+                x = x0 + (x1 - x0) * (ymin - y0) / (y1 - y0);
+                y = ymin;
+            } else if (codeOut & RIGHT) {
+                y = y0 + (y1 - y0) * (xmax - x0) / (x1 - x0);
+                x = xmax;
+            } else {
+                y = y0 + (y1 - y0) * (xmin - x0) / (x1 - x0);
+                x = xmin;
+            }
+
+            if (codeOut == code0) {
+                x0 = x;
+                y0 = y;
+                code0 = computeCode(x0, y0, xmin, ymin, xmax, ymax);
+            } else {
+                x1 = x;
+                y1 = y;
+                code1 = computeCode(x1, y1, xmin, ymin, xmax, ymax);
+            }
+        }
+    }
+
+    if (accept) {
+        glBegin(GL_LINES);
+        glVertex2f(x0, y0);
+        glVertex2f(x1, y1);
+        glEnd();
+    }
+    glFlush();
+}

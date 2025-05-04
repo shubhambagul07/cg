@@ -1,0 +1,37 @@
+#include <GL/glut.h>
+#include <cmath>
+
+void kochCurve(float x1, float y1, float x2, float y2, int depth) {
+    if (depth == 0) {
+        glBegin(GL_LINES);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+        glEnd();
+    } else {
+        float dx = x2 - x1;
+        float dy = y2 - y1;
+        float dist = sqrt(dx * dx + dy * dy) / 3;
+        float angle = atan2(dy, dx);
+
+        float x3 = x1 + cos(angle) * dist;
+        float y3 = y1 + sin(angle) * dist;
+        float x4 = x1 + cos(angle) * 2 * dist;
+        float y4 = y1 + sin(angle) * 2 * dist;
+        float x5 = x3 + cos(angle - M_PI / 3) * dist;
+        float y5 = y3 + sin(angle - M_PI / 3) * dist;
+        float x6 = x3 + cos(angle + M_PI / 3) * dist;
+        float y6 = y3 + sin(angle + M_PI / 3) * dist;
+
+        kochCurve(x1, y1, x3, y3, depth - 1);
+        kochCurve(x3, y3, x5, y5, depth - 1);
+        kochCurve(x5, y5, x6, y6, depth - 1);
+        kochCurve(x6, y6, x4, y4, depth - 1);
+        kochCurve(x4, y4, x2, y2, depth - 1);
+    }
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    kochCurve(-0.5, -0.5, 0.5, -0.5, 4);  // Example depth 4
+    glFlush();
+}

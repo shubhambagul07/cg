@@ -1,0 +1,17 @@
+void rotateObject(float* x, float* y, float angle, float cx, float cy) {
+    float radians = angle * (M_PI / 180.0);
+    float tempX = *x - cx;
+    float tempY = *y - cy;
+    *x = cx + tempX * cos(radians) - tempY * sin(radians);
+    *y = cy + tempX * sin(radians) + tempY * cos(radians);
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    float x = 0.5, y = 0.5;
+    rotateObject(&x, &y, 45.0, 0.0, 0.0);  // Rotate point by 45 degrees around (0,0)
+    glBegin(GL_POINTS);
+    glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}

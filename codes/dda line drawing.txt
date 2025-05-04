@@ -1,0 +1,29 @@
+#include <graphics.h>
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+void DDA(int x1, int y1, int x2, int y2) {
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+    float Xinc = dx / steps;
+    float Yinc = dy / steps;
+
+    float x = x1;
+    float y = y1;
+    for (int i = 0; i <= steps; i++) {
+        putpixel(round(x), round(y), WHITE);
+        x += Xinc;
+        y += Yinc;
+    }
+}
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+    DDA(100, 100, 300, 300);
+    getch();
+    closegraph();
+    return 0;
+}

@@ -1,0 +1,15 @@
+void boundaryFill(int x, int y, float boundaryColor[3], float fillColor[3]) {
+    float color[3];
+    glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, color);
+
+    if (color[0] != boundaryColor[0] && color[1] != boundaryColor[1] && color[2] != boundaryColor[2]) {
+        glBegin(GL_POINTS);
+        glColor3fv(fillColor);
+        glVertex2f(x, y);
+        glEnd();
+        boundaryFill(x + 1, y, boundaryColor, fillColor);
+        boundaryFill(x - 1, y, boundaryColor, fillColor);
+        boundaryFill(x, y + 1, boundaryColor, fillColor);
+        boundaryFill(x, y - 1, boundaryColor, fillColor);
+    }
+}

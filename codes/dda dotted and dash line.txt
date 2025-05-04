@@ -1,0 +1,22 @@
+void dottedLine(float x1, float y1, float x2, float y2) {
+    float dx = x2 - x1;
+    float dy = y2 - y1;
+    float steps = std::max(fabs(dx), fabs(dy));
+    float xIncrement = dx / steps;
+    float yIncrement = dy / steps;
+
+    float x = x1;
+    float y = y1;
+    int dotInterval = 5; // Adjust for distance between dots
+
+    glBegin(GL_POINTS);
+    for (int i = 0; i <= steps; i++) {
+        if (i % dotInterval == 0) {
+            glVertex2f(x, y);
+        }
+        x += xIncrement;
+        y += yIncrement;
+    }
+    glEnd();
+    glFlush();
+}

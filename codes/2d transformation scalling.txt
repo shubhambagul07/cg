@@ -1,0 +1,14 @@
+void scaleObject(float* x, float* y, float sx, float sy) {
+    *x *= sx;
+    *y *= sy;
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    float x = 0.5, y = 0.5;
+    scaleObject(&x, &y, 1.5, 1.5);  // Scaling the point
+    glBegin(GL_POINTS);
+    glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}

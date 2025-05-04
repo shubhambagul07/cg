@@ -1,0 +1,15 @@
+void floodFill(int x, int y, float oldColor[3], float newColor[3]) {
+    float color[3];
+    glReadPixels(x, y, 1, 1, GL_RGB, GL_FLOAT, color);
+
+    if (color[0] == oldColor[0] && color[1] == oldColor[1] && color[2] == oldColor[2]) {
+        glBegin(GL_POINTS);
+        glColor3fv(newColor);
+        glVertex2f(x, y);
+        glEnd();
+        floodFill(x + 1, y, oldColor, newColor);
+        floodFill(x - 1, y, oldColor, newColor);
+        floodFill(x, y + 1, oldColor, newColor);
+        floodFill(x, y - 1, oldColor, newColor);
+    }
+}

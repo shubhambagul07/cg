@@ -1,0 +1,16 @@
+void reflectObject(float* x, float* y, bool xAxis) {
+    if (xAxis)
+        *y = -(*y);  // Reflection about X-axis
+    else
+        *x = -(*x);  // Reflection about Y-axis
+}
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    float x = 0.5, y = 0.5;
+    reflectObject(&x, &y, true);  // Reflecting the point across X-axis
+    glBegin(GL_POINTS);
+    glVertex2f(x, y);
+    glEnd();
+    glFlush();
+}

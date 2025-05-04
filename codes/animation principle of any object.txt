@@ -1,0 +1,37 @@
+#include <GL/glut.h>
+
+float x = -0.8f;
+float y = 0.0f;
+
+void display() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glPushMatrix();
+    glTranslatef(x, y, 0.0f);  // Translate object
+    glBegin(GL_POLYGON);
+    for (int i = 0; i < 360; i++) {
+        float theta = i * (M_PI / 180.0);
+        glVertex2f(cos(theta) * 0.1, sin(theta) * 0.1);  // Draw circle
+    }
+    glEnd();
+    glPopMatrix();
+    glFlush();
+}
+
+void update(int value) {
+    x += 0.01f;  // Move object along x-axis
+    if (x > 1.0f) x = -1.0f;  // Reset position when it goes off screen
+    glutPostRedisplay();
+    glutTimerFunc(16, update, 0);  // Call update function every 16 ms (~60 FPS)
+}
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(500, 500);
+    glutCreateWindow("Animation");
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glutDisplayFunc(display);
+    glutTimerFunc(25, update, 0);
+    glutMainLoop();
+    return 0;
+}
