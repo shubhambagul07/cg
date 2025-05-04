@@ -1,0 +1,125 @@
+Practical 6: Implement 2D Transformations on an Object
+i) Scaling
+Line 1: Define Scaling Function
+
+Define a function that scales an object with respect to the x and y axes.
+
+Example: void scaleObject(float sx, float sy, float x0, float y0)
+
+Line 2: Apply Scaling Formula
+
+The scaling formula multiplies the original coordinates by the scaling factor (sx and sy).
+
+Example: newX = x0 * sx and newY = y0 * sy.
+
+Line 3: Draw Scaled Object
+
+After applying the scaling transformation, plot the scaled object (e.g., polygon, circle).
+
+Example: drawPolygon(newX, newY);
+
+ii) Rotation about an Arbitrary Point
+Line 1: Define Rotation Function
+
+Define a function to rotate an object about an arbitrary point (xr, yr) by an angle theta.
+
+Example: void rotateObject(float angle, float xr, float yr)
+
+Line 2: Apply Rotation Formula
+
+The rotation formula is:
+
+𝑥
+′
+=
+𝑥
+𝑟
++
+(
+𝑥
+−
+𝑥
+𝑟
+)
+⋅
+cos
+⁡
+(
+𝜃
+)
+−
+(
+𝑦
+−
+𝑦
+𝑟
+)
+⋅
+sin
+⁡
+(
+𝜃
+)
+x 
+′
+ =xr+(x−xr)⋅cos(θ)−(y−yr)⋅sin(θ)
+𝑦
+′
+=
+𝑦
+𝑟
++
+(
+𝑥
+−
+𝑥
+𝑟
+)
+⋅
+sin
+⁡
+(
+𝜃
+)
++
+(
+𝑦
+−
+𝑦
+𝑟
+)
+⋅
+cos
+⁡
+(
+𝜃
+)
+y 
+′
+ =yr+(x−xr)⋅sin(θ)+(y−yr)⋅cos(θ)
+Line 3: Draw Rotated Object
+
+After calculating the new coordinates using the rotation formula, plot the rotated object.
+
+Example: drawRotatedObject(newX, newY);
+
+iii) Reflection
+Line 1: Define Reflection Function
+
+Define a function to reflect an object across a specific axis (x-axis, y-axis, or any line).
+
+Example: void reflectObject(char axis)
+
+Line 2: Apply Reflection Formula
+
+Depending on the axis of reflection, apply the following formulas:
+
+For reflection across the x-axis: y' = -y
+
+For reflection across the y-axis: x' = -x
+
+Line 3: Draw Reflected Object
+
+After applying the reflection, plot the reflected object.
+
+Example: drawReflectedObject(newX, newY);

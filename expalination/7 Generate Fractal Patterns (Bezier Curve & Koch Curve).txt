@@ -1,0 +1,87 @@
+Practical 7: Generate Fractal Patterns (Bezier Curve & Koch Curve)
+i) Bezier Curve
+Line 1: Define Bezier Function
+
+Define a function to draw a Bezier curve using control points.
+
+Example: void bezierCurve(float p0x, float p0y, float p1x, float p1y, float p2x, float p2y)
+
+Line 2: Calculate Intermediate Points
+
+For a quadratic Bezier curve, calculate intermediate points using the formula:
+
+𝐵
+(
+𝑡
+)
+=
+(
+1
+−
+𝑡
+)
+2
+⋅
+𝑃
+0
++
+2
+(
+1
+−
+𝑡
+)
+⋅
+𝑡
+⋅
+𝑃
+1
++
+𝑡
+2
+⋅
+𝑃
+2
+B(t)=(1−t) 
+2
+ ⋅P0+2(1−t)⋅t⋅P1+t 
+2
+ ⋅P2
+where t varies from 0 to 1.
+
+Line 3: Draw Bezier Curve
+
+Plot the curve by incrementing t from 0 to 1 and calculating the corresponding point on the curve.
+
+Example: glVertex2f(x, y) to plot the point.
+
+ii) Koch Curve
+Line 1: Define Koch Curve Function
+
+Define a recursive function to generate the Koch curve.
+
+Example: void kochCurve(float x0, float y0, float x1, float y1, int level)
+
+Line 2: Base Case for Recursion
+
+The recursion stops when the level reaches 0, and you draw a straight line between the two points.
+
+Example: if (level == 0) drawLine(x0, y0, x1, y1);
+
+Line 3: Divide Line into Subsegments
+
+If the level is greater than 0, divide the line into smaller segments and apply the Koch curve to each subsegment.
+
+Example:
+
+cpp
+Copy
+Edit
+float p2x = (x0 + 2 * x1) / 3;
+float p2y = (y0 + 2 * y1) / 3;
+Line 4: Recursive Call
+
+Call the Koch function recursively on each of the new segments.
+
+Example: kochCurve(x0, y0, p2x, p2y, level - 1);
+

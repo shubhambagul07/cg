@@ -1,0 +1,39 @@
+Practical 3: Implement Bresenham Circle Drawing Algorithm
+Line 1: Define Circle Function
+
+Define the circle drawing function, taking center (x0, y0) and radius r as parameters.
+
+Example: void bresenhamCircle(int x0, int y0, int r).
+
+Line 2: Initialize Variables
+
+Initialize variables such as x = 0, y = r, and p = 3 - 2 * r, which are required for the algorithm.
+
+Line 3: Symmetry Points
+
+The algorithm makes use of symmetry, so you calculate and draw points in all octants (8 points for a circle).
+
+Example: glVertex2f(x0 + x, y0 + y); to plot points.
+
+Line 4: Circle Algorithm
+
+In a loop, adjust x and y based on the decision parameter p. If p is less than 0, increment x; otherwise, decrement y and adjust p.
+
+Example:
+
+cpp
+Copy
+Edit
+p = p + 4 * x + 6;
+if (p > 0) {
+    y--;
+    p = p + 4 * (y - x) + 10;
+}
+x++;
+Line 5: Draw Points
+
+For each iteration, plot the calculated points for the circle in all octants.
+
+Line 6: Loop Until the Circle is Complete
+
+Continue the loop until x > y, which indicates that all the points have been calculated.

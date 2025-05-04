@@ -1,0 +1,65 @@
+Practical 5: Implement Cohen Sutherland Polygon Clipping Method
+Line 1: Define Clipping Function
+
+Start by defining a function for the Cohen-Sutherland algorithm, which will take the polygon's vertices and the window coordinates (viewport) as input.
+
+Example: void cohenSutherlandClip(int x1, int y1, int x2, int y2, int xmin, int ymin, int xmax, int ymax)
+
+Line 2: Define Region Codes
+
+Define region codes for the four edges (left, right, bottom, and top). The region codes are used to identify which part of the viewport the point belongs to.
+
+Example:
+
+cpp
+Copy
+Edit
+int regionCode1 = computeRegionCode(x1, y1, xmin, ymin, xmax, ymax);
+int regionCode2 = computeRegionCode(x2, y2, xmin, ymin, xmax, ymax);
+Line 3: Compute Region Code
+
+The computeRegionCode function determines whether a point lies outside of the clipping window. It assigns binary codes for each region: left, right, top, bottom, and inside.
+
+Example:
+
+cpp
+Copy
+Edit
+if (x < xmin) return 1;   // left
+if (x > xmax) return 2;   // right
+if (y < ymin) return 4;   // bottom
+if (y > ymax) return 8;   // top
+Line 4: Check for Full Visibility
+
+If both endpoints of the line segment are inside the viewport (region code 0), then the entire line is visible, and no clipping is needed.
+
+Example:
+
+cpp
+Copy
+Edit
+if (!(regionCode1 | regionCode2)) {
+    // Draw the line if both points are inside the clipping window
+    drawLine(x1, y1, x2, y2);
+}
+Line 5: Perform Clipping
+
+If one or both endpoints are outside the viewport, we clip the line by finding where it intersects the window boundaries. We keep moving the points into the viewport until the line is fully clipped.
+
+Example:
+
+cpp
+Copy
+Edit
+if (regionCode1 & regionCode2) {
+    // Line is completely outside the window
+    return;
+} else {
+    // Perform intersection and adjust the coordinates
+}
+Line 6: Draw Clipped Line
+
+Once the line is clipped, you can draw it using OpenGL or other libraries.
+
+Example: drawLine(clippedX1, clippedY1, clippedX2, clippedY2);
+

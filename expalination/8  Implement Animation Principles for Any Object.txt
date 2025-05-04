@@ -1,0 +1,46 @@
+Practical 8  Implement Animation Principles for Any Object
+Line 1: Define Animation Function
+
+Define a function that will animate an object (e.g., a moving ball or rotating square).
+
+Example: void animateObject()
+
+Line 2: Initialize Variables
+
+Initialize variables for the object’s position, velocity, and direction.
+
+Example: float x = 0, y = 0, vx = 0.05, vy = 0.05;
+
+Line 3: Update Position
+
+At each frame, update the position of the object based on its velocity.
+
+Example:
+
+cpp
+Copy
+Edit
+x += vx;
+y += vy;
+Line 4: Boundary Checks
+
+Check if the object has hit the boundaries (e.g., the window edges). If it does, reverse the direction to create a bouncing effect.
+
+Example:
+
+cpp
+Copy
+Edit
+if (x < 0 || x > windowWidth) vx = -vx;
+if (y < 0 || y > windowHeight) vy = -vy;
+Line 5: Draw Object
+
+Draw the object at its updated position.
+
+Example: drawCircle(x, y);
+
+Line 6: Refresh Screen
+
+Call a function to refresh the screen and display the updated animation.
+
+Example: glutPostRedisplay();

@@ -1,0 +1,71 @@
+Practical 4: Implement Polygon Filling Methods (Flood Fill and Boundary Fill)
+i) Flood Fill
+Line 1: Define Flood Fill Function
+
+Define the flood fill function, which will recursively fill an enclosed area with a specific color. This function takes the initial point and the target color.
+
+Example: void floodFill(int x, int y, int targetColor, int fillColor).
+
+Line 2: Base Case
+
+The base case is where the function stops if the current pixel is already filled with the fillColor or if it’s out of bounds.
+
+Example:
+
+cpp
+Copy
+Edit
+if (currentColor == fillColor) return;
+Line 3: Change Pixel Color
+
+Set the current pixel to the fill color using glColor or direct pixel manipulation.
+
+Example: glVertex2f(x, y) to plot the point.
+
+Line 4: Recursive Calls
+
+Recursively call the floodFill function for neighboring pixels (up, down, left, right).
+
+Example:
+
+cpp
+Copy
+Edit
+floodFill(x + 1, y, targetColor, fillColor);
+floodFill(x - 1, y, targetColor, fillColor);
+floodFill(x, y + 1, targetColor, fillColor);
+floodFill(x, y - 1, targetColor, fillColor);
+ii) Boundary Fill
+Line 1: Define Boundary Fill Function
+
+Define the boundary fill function, which fills an enclosed area by checking boundaries and filling pixels until the boundary color is encountered.
+
+Example: void boundaryFill(int x, int y, int boundaryColor, int fillColor).
+
+Line 2: Base Case
+
+Check if the current pixel is the boundary color or already filled with the fill color, in which case stop recursion.
+
+Example:
+
+cpp
+Copy
+Edit
+if (currentColor == boundaryColor || currentColor == fillColor) return;
+Line 3: Fill Pixel
+
+Change the pixel’s color to the fill color using OpenGL’s glVertex2f or direct pixel manipulation.
+
+Line 4: Recursive Calls
+
+Call the boundaryFill function for adjacent pixels (up, down, left, right) until the boundary is reached.
+
+Example:
+
+cpp
+Copy
+Edit
+boundaryFill(x + 1, y, boundaryColor, fillColor);
+boundaryFill(x - 1, y, boundaryColor, fillColor);
+boundaryFill(x, y + 1, boundaryColor, fillColor);
+boundaryFill(x, y - 1, boundaryColor, fillColor);

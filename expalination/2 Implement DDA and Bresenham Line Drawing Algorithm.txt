@@ -1,0 +1,47 @@
+Practical 2: Implement DDA and Bresenham Line Drawing Algorithm
+i) Simple Line using DDA
+Line 1: Define Function
+
+Define a function to draw a line using DDA (Digital Differential Analyzer) algorithm.
+
+Example: void DDA(float x0, float y0, float x1, float y1).
+
+Line 2: Calculate Differences
+
+Calculate the differences in x (dx = x1 - x0) and y (dy = y1 - y0), and the number of steps required to draw the line.
+
+Example: steps = max(abs(dx), abs(dy)).
+
+Line 3: Calculate Increment Values
+
+For DDA, we need to calculate the increments for x and y in each step.
+
+Example: xIncrement = dx / steps and yIncrement = dy / steps.
+
+Line 4: Iterate and Plot Points
+
+Use a loop to iterate through the number of steps, incrementing x and y values each time and plotting the corresponding point.
+
+Example: glVertex2f(x0 + xIncrement * i, y0 + yIncrement * i).
+
+Line 5: Draw Points
+
+The glVertex2f function is used to plot points for each increment in the loop.
+
+ii) Dotted Line
+Line 1: Modify Loop
+
+In the loop where you plot points, add a condition to skip some points in between, creating a dotted effect.
+
+Example: if (i % 5 == 0) glVertex2f(x0 + xIncrement * i, y0 + yIncrement * i).
+
+iii) Dashed Line
+Line 1: Alternate Dots and Spaces
+
+For a dashed line, alternate between drawing points and skipping them. You can use a similar modulo condition like if (i % 10 < 5) to create the dashed effect.
+
+iv) Solid Line
+Line 1: Regular Line
+
+For a solid line, simply iterate over all points and draw them using glVertex2f.
+
